@@ -1,9 +1,13 @@
 #include <SFML/Graphics.hpp>
+#include "marie.h"
 
 int main()
 {
-    auto window = sf::RenderWindow{ { 1920u, 1080u }, "CMake SFML Project" };
+    // "Unelmia" is probably a placeholder name, but I like it
+    auto window = sf::RenderWindow{ { 640u, 480u }, "Unelmia" };
     window.setFramerateLimit(144);
+
+    Player* marie = new Player(0, 100, 100);
 
     while (window.isOpen())
     {
@@ -16,6 +20,11 @@ int main()
         }
 
         window.clear();
+
+        // main game loop
+        marie->Update();
+        window.draw(marie->sprite);
+
         window.display();
     }
 }
