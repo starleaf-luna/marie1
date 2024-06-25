@@ -7,7 +7,7 @@ int main()
     auto window = sf::RenderWindow{ { 640u, 480u }, "Unelmia" };
     window.setFramerateLimit(144);
 
-    Player* marie = new Player(0, 100, 100);
+    Player* marie = new Player(100, 100);
 
     while (window.isOpen())
     {

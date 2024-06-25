@@ -13,6 +13,7 @@ public:
 	bool isDying;
 	bool canHurtPlayer;
 	bool isCutscene;
+	bool inAir;
 	float x;
 	float y;
 	float xvel;
@@ -32,6 +33,7 @@ public:
 		isDying = false; // can't die while being spawned
 		canHurtPlayer = hurts;
 		isCutscene = false;
+		inAir = false;
 		x = ax;
 		y = ay;
 		xvel = 0.f;
@@ -56,6 +58,8 @@ public:
 		if (isActive) {
 			x += xvel;
 			y += yvel;
+			inAir = true;
+			yvel += 0.3f;
 			sprite.setPosition(x, y);
 			if (isPlayer && !isCutscene) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
