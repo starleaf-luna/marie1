@@ -15,6 +15,8 @@ public:
 	bool isCutscene;
 	float x;
 	float y;
+	float xvel;
+	float yvel;
 	unsigned int animation;
 	unsigned int animationFrame;
 	unsigned int sprWidth;
@@ -29,15 +31,20 @@ public:
 		isActive = active;
 		isDying = false; // can't die while being spawned
 		canHurtPlayer = hurts;
+		isCutscene = false;
 		x = ax;
 		y = ay;
+		xvel = 0.f;
+		yvel = 0.f;
 		animation = 0;
 		animationFrame = 0;
 		sprWidth = width;
 		sprHeight = height;
 
 		// we have to be able to load the texture! if we can't, give up!
-		if (!texture.loadFromFile(filename, sf::IntRect(0, 0, width, height))) return;
+		if (!texture.loadFromFile(filename, sf::IntRect(0, 0, width, height))) {
+			printf("cannot find");
+		};
 		texture.setSmooth(false);
 		
 		sprite.setTexture(texture);
@@ -45,25 +52,23 @@ public:
 		sprite.setScale(3, 3);
 	}
 
-	void Move(float offsetX, float offsetY) {
-		// placeholder, lacks many things
-		x += offsetX;
-		y += offsetY;
-	}
-
 	void Update() {
 		if (isActive) {
+			x += xvel;
+			y += yvel;
 			sprite.setPosition(x, y);
 			if (isPlayer && !isCutscene) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-					Move(-1, 0);
+					xvel = -1.6f;
 				} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-					Move(1, 0);
-				} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-					Move(0, -1);
-				} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-					Move(0, 1);
+					xvel = 1.6f;
+				} else {
+					xvel = 0.f;
 				}
+				
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+					yvel = -6.f;
+				} 
 			}
 		}
 	}
