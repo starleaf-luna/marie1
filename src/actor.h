@@ -4,6 +4,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "tileset.h"
 
 class Actor {
 
@@ -54,7 +55,7 @@ public:
 		sprite.setScale(3, 3);
 	}
 
-	void Update() {
+	void Update(TileMap collisionMap) {
 		if (isActive) {
 			x += xvel;
 			y += yvel;
