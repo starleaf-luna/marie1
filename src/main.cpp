@@ -63,9 +63,10 @@ int main()
         window.clear();
 
         // main game loop
-        marie->Update(map);
+        marie->update(map);
         window.draw(map);
         window.draw(marie->sprite);
+        printf("debug position print: %d", marie->getGlobalBounds());
 
         window.display();
     }

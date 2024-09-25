@@ -25,4 +25,5 @@ endif()
 
 add_custom_command(
     TARGET mariebin POST_BUILD 
+    COMMENT "Copy assets"
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/assets $<TARGET_FILE_DIR:mariebin>/assets)

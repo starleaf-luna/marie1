@@ -55,7 +55,7 @@ public:
 		sprite.setScale(3, 3);
 	}
 
-	void Update(TileMap collisionMap) {
+	void update(TileMap collisionMap) {
 		if (isActive) {
 			x += xvel;
 			y += yvel;
