@@ -10,10 +10,9 @@ class TileMap : public sf::Drawable, public sf::Transformable
 {
 public:
 
-    // todo: add a function to return the collision box of a specific tile
-
     bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
     {
+        tiledef = tiles;
         // load the tileset texture
         if (!m_tileset.loadFromFile(tileset))
             return false;
@@ -57,10 +56,17 @@ public:
     }
 
     sf::FloatRect getTileBounds(unsigned int x, unsigned int y, unsigned int width, unsigned int height) {
-        
+        sf::Vector2f a = m_vertices[(x + y * width) * 6].position;
+        return sf::FloatRect(a.x, a.y, width, height);
+    }
+
+    int getTileID(unsigned int x, unsigned int y) {
+        return tiledef[x * y];
     }
 
 private:
+
+    const int* tiledef = 0;
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {

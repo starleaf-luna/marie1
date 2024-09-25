@@ -66,7 +66,8 @@ int main()
         marie->update(map);
         window.draw(map);
         window.draw(marie->sprite);
-        printf("debug position print: %d", marie->getGlobalBounds());
+        printf("tileID at x: 34, y: 30 = %d\n", map.getTileID(34, 30));
+        printf("tileID2 at x: 34, y: 30 = %d\n", level[34 * 30]);
 
         window.display();
     }

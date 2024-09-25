@@ -62,6 +62,11 @@ public:
 			inAir = true;
 			yvel += 0.3f;
 			sprite.setPosition(x, y);
+
+			if (checkCollide(collisionMap)) {
+
+			}
+			
 			if (isPlayer && !isCutscene) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 					xvel = -1.6f;
@@ -76,6 +81,20 @@ public:
 				} 
 			}
 		}
+	}
+
+	sf::FloatRect getGlobalBounds() {
+		return sprite.getGlobalBounds();
+	}
+
+	sf::FloatRect getLocalBounds() {
+		return sprite.getLocalBounds();
+	}
+
+	bool checkCollide(TileMap collisionMap) {
+		sf::FloatRect tilerect = collisionMap.getTileBounds(x / 16, y / 16, 16, 16);
+		sf::FloatRect sprrect = getGlobalBounds();
+		return (abs(tilerect.left - sprrect.left) < 16 && abs(tilerect.top - sprrect.top) < 16);
 	}
 
 	Actor() = default;
